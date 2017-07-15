@@ -1,0 +1,10 @@
+function [ Thick_max ] = MaxThickness( Thickness_Profile )
+%MAXTHICKNESS Summary of this function goes here
+%   Input: Thickness_Profile: First row is the x coord while the second,
+%   the thickness
+%   Out
+
+[T, I] = max(Thickness_Profile(2,:));
+Thick_max = [Thickness_Profile(1,I), T];
+end
+
