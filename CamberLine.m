@@ -14,7 +14,7 @@ function [Results] = CamberLine( camber_angle_1, camber_angle_2, Stagger )
 %       4th row: Y' coord with Stagger
 
 P1 = [0 0];
-P3 = [1/cosd(Stagger) 0];
+P3 = [1 0];
 
 % Determination of P2
 P2(1) = 1/(1+tand(camber_angle_1)/tand(camber_angle_2));

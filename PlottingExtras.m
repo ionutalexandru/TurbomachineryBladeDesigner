@@ -12,9 +12,10 @@ function Results = PlottingExtras(CamberAngle1, CamberAngle2, Stagger, yc_ult)
 %% Metal Angles
 MetalInlet = CamberAngle1 - Stagger;
 MetalOutlet = CamberAngle2 + Stagger;
+xc_ult = cosd(Stagger);
 
 %% Inlet
-x_IN = (tand(MetalOutlet) + yc_ult)/(tand(MetalInlet) + tand(MetalOutlet));
+x_IN = (tand(MetalOutlet)*xc_ult + yc_ult)/(tand(MetalInlet) + tand(MetalOutlet));
 n = 1000;
 x1 = linspace(-0.25*cosd(MetalInlet),x_IN+0.15*cosd(MetalInlet),n);
 y1 = tand(MetalInlet)*x1;
@@ -32,14 +33,14 @@ Curve1(2,:) = yCurve1;
 Results{2} = Curve1;
 
 %% Outlet
-x2 = linspace(x_IN-0.15*cosd(MetalOutlet),1+0.15*cosd(MetalOutlet),n);
-y2 = tand(MetalOutlet)*(1-x2) + yc_ult;
+x2 = linspace(x_IN-0.15*cosd(MetalOutlet),xc_ult+0.15*cosd(MetalOutlet),n);
+y2 = tand(MetalOutlet)*(xc_ult-x2) + yc_ult;
 Line2(1,:) = x2;
 Line2(2,:) = y2;
 Results{3} = Line2;
 
 %Horizontal Line
-x3 = linspace(0.95,1.25,n);
+x3 = linspace(xc_ult-0.05,xc_ult+0.25,n);
 y3 = yc_ult*ones(1,n);
 Line3(1,:) = x3;
 Line3(2,:) = y3;
@@ -47,7 +48,7 @@ Results{4} = Line3;
 
 % Curve
 angle2 = linspace(0, MetalOutlet, n);
-Curve2(1,:) = cosd(angle2)*rCurve+1;
+Curve2(1,:) = cosd(angle2)*rCurve+xc_ult;
 Curve2(2,:) = yc_ult-sind(angle2)*rCurve;
 Results{5} = Curve2;
 
