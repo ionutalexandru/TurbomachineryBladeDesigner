@@ -1,4 +1,4 @@
-function Results = BladeProfile(Xc, Yc, Thickness_Profile, Stagger, MaxThickness)
+function Results = BladeProfile(Xc, Yc, Thickness_Profile, Stagger)
 %	Blade_profile Summary of this function goes here:
 %	Inputs:
 %		X coordinates of the camber line
@@ -14,9 +14,9 @@ ProfileFileName = strcat(Thickness_Profile,'.txt');
 Thickness = load(ProfileFileName);
 xt = Thickness(1,:)/100;
 t = Thickness(2,:)/100; %Multiply by the chord 1
-tmax = max(t);
-ScallingFactor = MaxThickness/tmax;
-t = t*ScallingFactor;
+% tmax = max(t);
+% ScallingFactor = MaxThickness/tmax;
+% t = t*ScallingFactor;
 
 %% Differentiation vectors
 diffX = zeros(1,numel(Xc)-1);
