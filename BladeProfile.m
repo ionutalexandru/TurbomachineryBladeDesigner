@@ -11,8 +11,8 @@ function Results = BladeProfile(Xc, Yc, Thickness_Profile, Stagger, Max_Thick)
 
 %% Load profile
 ProfileFileName = strcat(Thickness_Profile,'.txt');
-Thickness = load(ProfileFileName);
-Max_Thick = Max_Thick/100; %Multiplied by the chord length = 1
+Thickness = load(ProfileFileName); 
+%Multiplied by the chord length = 1
 xt = Thickness(1,:)/100;
 t = Thickness(2,:)/100; %Multiply by the chord 1
 tmax = max(t);
