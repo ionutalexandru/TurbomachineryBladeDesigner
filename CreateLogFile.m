@@ -5,7 +5,7 @@ function FileName = CreateLogFile
 
 format shortg
 c = clock();
-FileName = strcat('Log','-',num2str(c(1)),'-',num2str(c(2)),'-',num2str(c(3)),'@',num2str(c(4)),'-',num2str(c(5)),'-',round(num2str(c(6))),'.log');
+FileName = strcat('.\Log\Log','-',num2str(c(1)),'-',num2str(c(2)),'-',num2str(c(3)),'@',num2str(c(4)),'-',num2str(c(5)),'-',round(num2str(c(6))),'.log');
 fileID = fopen(FileName,'a+');
 text1 = FileName;
 text2 = 'This Log File contains all the changes made by the user';
