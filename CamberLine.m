@@ -37,8 +37,8 @@ R = [cosd(Stagger) -sind(Stagger);sind(Stagger) cosd(Stagger)];
     end
 
 %% Results Matrix
-Results(1,:) = X1;
-Results(2,:) = Y1;
-Results(3,:) = X2;
-Results(4,:) = Y2;
+Results(1,:) = X1; %X-Camber without Rotation
+Results(2,:) = Y1; %Y-Camber without Rotation
+Results(3,:) = X2; %X-Camber with Rotation
+Results(4,:) = Y2; %Y-Camber with Rotation
 end
