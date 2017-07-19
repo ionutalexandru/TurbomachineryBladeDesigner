@@ -4,7 +4,7 @@ function [ Thick_max ] = MaxThickness( Thickness_Profile )
 %   the thickness
 %   Output: Maximum Thickness of the Profile and the x-coord
 %% Load profile
-ProfileFileName = strcat(Thickness_Profile,'.txt');
+ProfileFileName = strcat(Thickness_Profile,'.dat');
 Thickness = load(ProfileFileName);
 %Multiply by the chord 1
 [T, I] = max(Thickness(2,:)); % 100%
