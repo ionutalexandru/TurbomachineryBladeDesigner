@@ -5,9 +5,9 @@ function Message = DeleteProfile(Name, type)
 %   it will be deleted
 %   It also updates the listbox names
 
-ProfileName = ['ThicknessProfiles',type,'.dat'];
+ProfileName = ['.\ThicknessProfiles\ThicknessProfiles',type,'.dat'];
 Profiles = importdata(ProfileName);
-FileName = [Name,'.txt'];
+FileName = ['.\ThicknessProfiles\',Name,'.dat'];
 
 delete(FileName);
 n=1;

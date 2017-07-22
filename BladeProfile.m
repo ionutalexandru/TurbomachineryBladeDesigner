@@ -9,7 +9,7 @@ function Results = BladeProfile(ThicknessProfileName, Max_Thick, Xc, Yc, Stagger
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Load Thickness
-ProfileFileName = strcat(ThicknessProfileName, '.dat');
+ProfileFileName = strcat('.\ThicknessProfiles\',ThicknessProfileName, '.dat');
 ThicknessRaw = load(ProfileFileName)/100; % Load profile
 Xc1 = linspace(0,1,1000); % For presentations purposes
 t1 = interp1(ThicknessRaw(1,:),ThicknessRaw(2,:),Xc1,'pchip');

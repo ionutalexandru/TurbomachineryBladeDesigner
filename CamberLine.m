@@ -1,4 +1,4 @@
-function [Results] = CamberLine( camber_angle_1, camber_angle_2, Stagger )
+function [Results] = CamberLine( camber_angle_1, camber_angle_2, Stagger, Option )
 %BEZIER_3 Summary of this function goes here
 %   This function deliver the camber line of the profile
 %   taking as chord length = 1 and plotting the chord with Bèzier
@@ -28,7 +28,10 @@ Y1 = (1-t).^2*P1(2)+2*t.*(1-t)*P2(2)+t.^2*P3(2);
 
 %% Rotate the camber line about Z and at an angle=stagger
 
-Stagger = -Stagger;
+if isequal(Option,'T')
+    Stagger = -Stagger;
+end
+
 R = [cosd(Stagger) -sind(Stagger);sind(Stagger) cosd(Stagger)];
     for i = 1:num
        V = R*[X1(i) Y1(i)]';
