@@ -1,4 +1,4 @@
-function [Results] = CamberLine( camber_angle_1, camber_angle_2, Stagger, Option )
+function [Results] = CamberLine( MetalAngle1, MetalAngle2, Stagger, Option )
 %BEZIER_3 Summary of this function goes here
 %   This function deliver the camber line of the profile
 %   taking as chord length = 1 and plotting the chord with Bèzier
@@ -14,34 +14,25 @@ function [Results] = CamberLine( camber_angle_1, camber_angle_2, Stagger, Option
 %       4th row: Y' coord with Stagger
 
 P1 = [0 0];
-P3 = [1 0];
-
-% Determination of P2
-P2(1) = 1/(1+tand(camber_angle_1)/tand(camber_angle_2));
-P2(2) = tand(camber_angle_1)*P2(1);
-
-%% Bezier curve
-num = 1000;
-t = linspace(0,1,num);
-X1 = (1-t).^2*P1(1)+2*t.*(1-t)*P2(1)+t.^2*P3(1);
-Y1 = (1-t).^2*P1(2)+2*t.*(1-t)*P2(2)+t.^2*P3(2);
-
-%% Rotate the camber line about Z and at an angle=stagger
-
 if isequal(Option,'T')
-    Stagger = -Stagger;
+    P3 = [cosd(Stagger) -sind(Stagger)];
+else
+    P3 = [cosd(Stagger) sind(Stagger)];
 end
 
-R = [cosd(Stagger) -sind(Stagger);sind(Stagger) cosd(Stagger)];
-    for i = 1:num
-       V = R*[X1(i) Y1(i)]';
-       X2(i) = V(1);
-       Y2(i) = V(2);
-    end
+% Determination of P2
+P2(1) = (tand(MetalAngle2)*P3(1)+P3(2))/(tand(MetalAngle2) + tand(MetalAngle1));
+P2(2) = tand(MetalAngle1)*P2(1);
+
+
+P = [P1(1) P1(2); P2(1) P2(2); P3(1) P3(2)];
+
+%% Bezier curve
+
+Bezier = BezierCurve(P,3);
+
 
 %% Results Matrix
-Results(1,:) = X1; %X-Camber without Rotation
-Results(2,:) = Y1; %Y-Camber without Rotation
-Results(3,:) = X2; %X-Camber with Rotation
-Results(4,:) = Y2; %Y-Camber with Rotation
+Results(1,:) = Bezier(:,1); %X-Camber
+Results(2,:) = Bezier(:,2); %Y-Camber
 end

@@ -1,8 +1,8 @@
-function Results = BladeProfile(ThicknessProfileName, Max_Thick, Xc, Yc, Stagger)
+function Results = BladeProfile(ThicknessProfileName, Max_Thick, Xc, Yc, Stagger, Option)
 %	Blade_profile Summary of this function goes here:
 %	Inputs:
-%		X coordinates of the camber line - Stagger 0
-%		Y coordinates of the camber line - Stagger 0
+%		X coordinates of the camber line
+%		Y coordinates of the camber line
 %		Thickness_Profile - to be chosen by the user
 %	Results Output matrix
 %   To be noted that chord length is 1
@@ -19,9 +19,23 @@ ScallingFactor = Max_Thick/tmax; % Scalling Factor
 
 
 %% Differential Vectors
+if isequal(Option, 'T')
+    R = [cosd(Stagger) -sind(Stagger); sind(Stagger) cosd(Stagger)];
+else
+    R = [cosd(-Stagger) -sind(-Stagger); sind(-Stagger) cosd(-Stagger)];
+end
+
+for i = 1:numel(Xc)
+    x = Xc(i);
+    y = Yc(i);
+    v = [x; y];
+   V = R*v;
+   Xc(i) = V(1);
+   Yc(i) = V(2);
+end
 diffX = diff(Xc);
 diffY = diff(Yc);
-thetac = [0 atand(diffY./diffX)]; % First Value 0 and ThetaC definition
+thetac = [0 atand(diffY./diffX)] + Stagger; % First Value 0 and ThetaC definition
 
 %% Redefine Thickness distribution according with Xc coordinations
 t2 = ScallingFactor*interp1(Xc1,t1,Xc,'pchip');
@@ -34,8 +48,13 @@ ya = Yc + t2.*cosd(thetac);
 xb = Xc + t2.*sind(thetac); % It goes from 0 to 1
 yb = Yc - t2.*cosd(thetac);
 
-%% Rotate
-R = [cosd(-Stagger) -sind(-Stagger);sind(-Stagger) cosd(-Stagger)];
+% %% Rotate
+if isequal(Option, 'T')
+    R = [cosd(-Stagger) -sind(-Stagger);sind(-Stagger) cosd(-Stagger)];
+else
+    R = [cosd(Stagger) -sind(Stagger); sind(Stagger) cosd(Stagger)];
+end
+
 for i = 1:numel(xa)
    V = R*[xa(i) ya(i)]';
    xa(i) = V(1);

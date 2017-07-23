@@ -1,4 +1,4 @@
-function Results = PlottingExtras(CamberAngle1, CamberAngle2, Stagger, yc_ult)
+function Results = PlottingExtrasC(MetalInlet, MetalOutlet, Stagger, yc_ult)
 %PLOTTINGEXTRAS Summary of this function goes here
 %   Detailed explanation goes here
 %   This function receive as inputs:
@@ -10,12 +10,10 @@ function Results = PlottingExtras(CamberAngle1, CamberAngle2, Stagger, yc_ult)
 %   plot Camber Angles, Stagger and Camber Angle
 
 %% Metal Angles
-MetalInlet = CamberAngle1 - Stagger;
-MetalOutlet = CamberAngle2 + Stagger;
 xc_ult = cosd(Stagger);
 
 %% Inlet
-x_IN = (tand(MetalOutlet)*xc_ult + yc_ult)/(tand(MetalInlet) + tand(MetalOutlet));
+x_IN = (tand(MetalOutlet)*xc_ult + yc_ult)/(tand(MetalInlet) + tand(MetalOutlet)); %Intersection point
 n = 1000;
 x1 = linspace(-0.25*cosd(MetalInlet),x_IN+0.15*cosd(MetalInlet),n);
 y1 = tand(MetalInlet)*x1;
