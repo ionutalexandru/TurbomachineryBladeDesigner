@@ -21,7 +21,12 @@ else
 end
 
 % Determination of P2
-P2(1) = (tand(MetalAngle2)*P3(1)+P3(2))/(tand(MetalAngle2) + tand(MetalAngle1));
+
+if isequal(Option, 'T')
+    P2(1) = (tand(MetalAngle2)*P3(1)+P3(2))/(tand(MetalAngle2) + tand(MetalAngle1));
+else
+   P2(1) = (-tand(MetalAngle2)*P3(1)+P3(2))/(-tand(MetalAngle2) + tand(MetalAngle1));
+end
 P2(2) = tand(MetalAngle1)*P2(1);
 
 
