@@ -1,11 +1,11 @@
-function FileName = CreateLogFile
+function FileName = CreateLogFile(Option)
 %CREATELOGFILE Summary of this function goes here
 %   Detailed explanation goes here:
 %   This function create the log file
 
 format shortg
 c = clock();
-FileName = strcat('.\Log\Log','-',num2str(c(1)),'-',num2str(c(2)),'-',num2str(c(3)),'@',num2str(c(4)),'-',num2str(c(5)),'-',round(num2str(c(6))),'.log');
+FileName = strcat('.\Log\Log_',Option,'-',num2str(c(1)),'-',num2str(c(2)),'-',num2str(c(3)),'@',num2str(c(4)),'-',num2str(c(5)),'-',round(num2str(c(6))),'.log');
 fileID = fopen(FileName,'a+');
 text1 = FileName;
 text2 = 'This Log File contains all the changes made by the user';
