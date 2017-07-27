@@ -1,4 +1,4 @@
-function [ LE, Camber, TE, Camber2, Curve1, Curve2, Curve3, Curve4 ] = BladeManual( MetalInlet, MetalOutlet, Stagger, a, b, phi_LESS, phi_LEPS, phi_TESS, phi_TEPS, rTE, s_c, o_c, t_c, phi_o, phi_t )
+function [ LE, Camber, TE, Camber2, Curve1, Curve2, Curve3, Curve4, CP_Bezier ] = BladeManual( MetalInlet, MetalOutlet, Stagger, a, b, phi_LESS, phi_LEPS, phi_TESS, phi_TEPS, rTE, s_c, o_c, t_c, phi_o, phi_t )
 %UNTITLED Summary of this function goes here
 %   Detailed explanation goes here
 %   This is for a turbine
@@ -85,6 +85,8 @@ CP4_SS = IntersectionPoint(CP3_SS(1), CP5_SS(1), CP3_SS(2), CP5_SS(2), -tand(phi
 CP4_PS = IntersectionPoint(CP3_PS(1), CP5_PS(1), CP3_PS(2), CP5_PS(2), -tand(phi_t), (TE(2,2)-TE(2,1))/(TE(1,2)-TE(1,1)));
 P3SS = [CP3_SS; CP4_SS; CP5_SS];
 P4PS = [CP3_PS; CP4_PS; CP5_PS];
+
+CP_Bezier = [CP_Bezier; CP2_SS; CP2_PS; CP4_SS; CP4_PS];
 
 %% Obtain Bezier curves
 Curve1 = BezierCurve(P1SS,3)';
