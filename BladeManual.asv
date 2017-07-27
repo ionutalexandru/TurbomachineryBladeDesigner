@@ -1,4 +1,4 @@
-function [ LE, Camber, TE, Camber2, Curve1, Curve2, Curve3, Curve4 ] = BladeManual( MetalInlet, MetalOutlet, Stagger, a, b, phi_LESS, phi_LEPS, phi_TESS, phi_TEPS, rTE, s_c, o_c, t_c, phi_o, phi_t )
+function [ LE, Camber, TE, CP_Bezier, Camber2, Curve1 ] = BladeManual( MetalInlet, MetalOutlet, Stagger, a, b, phi_LESS, phi_LEPS, phi_TESS, phi_TEPS, rTE, s_c, o_c, t_c, phi_o, phi_t )
 %UNTITLED Summary of this function goes here
 %   Detailed explanation goes here
 %   This is for a turbine
@@ -76,20 +76,15 @@ CP_Bezier = [CP_Bezier; CP3_SS; CP3_PS];
 
 %% Obtain second control point
 CP2_SS = IntersectionPoint(CP1_SS(1), CP3_SS(1), CP1_SS(2), CP3_SS(2), (LE(2,199)-LE(2,198))/(LE(1,199)-LE(1,198)), -tand(phi_o));
-CP2_PS = IntersectionPoint(CP1_PS(1), CP3_PS(1), CP1_PS(2), CP3_PS(2), (LE(2,2)-LE(2,1))/(LE(1,2)-LE(1,1)), -tand(phi_t));
-P1SS = [CP1_SS; CP2_SS; CP3_SS];
-P2PS = [CP1_PS; CP2_PS; CP3_PS];
+CP2_PS = IntersectionPoint(CP1_PS(1), CP3_PS(1), CP1_SS(2), CP3_PS(2), (LE(2,2)-LE(2,1))/(LE(1,2)-LE(1,1)), -tand(phi_t));
+PSS = [CP1_SS; CP2_SS; CP3_SS];
+PPS = [CP1_PS; CP2_PS; CP3_PS];
 
 %% Obtain the fourth intersection point 
-CP4_SS = IntersectionPoint(CP3_SS(1), CP5_SS(1), CP3_SS(2), CP5_SS(2), -tand(phi_o), (TE(2,199)-TE(2,198))/(TE(1,199)-TE(1,198)));
-CP4_PS = IntersectionPoint(CP3_PS(1), CP5_PS(1), CP3_PS(2), CP5_PS(2), -tand(phi_t), (TE(2,2)-TE(2,1))/(TE(1,2)-TE(1,1)));
-P3SS = [CP3_SS; CP4_SS; CP5_SS];
-P4PS = [CP3_PS; CP4_PS; CP5_PS];
+CP3_SS = IntersectionPoint(CP3_SS(1), CP5_SS(1), CP3_SS(2), CP3_5S(2), -tand(phi_o), (TE(2,199)-TE(2,198))/(TE(1,199)-TE(1,198)));
 
 %% Obtain Bezier curves
-Curve1 = BezierCurve(P1SS,3)';
-Curve2 = BezierCurve(P2PS,3)';
-Curve3 = BezierCurve(P3SS,3)';
-Curve4 = BezierCurve(P4PS,3)';
+Curve1 = BezierCurve(PSS,3)';
+Curve2 = BezierCurve(PPS,3)';
 end
 
