@@ -1,12 +1,13 @@
-function [] = MISES_files(BladeName, Option, InletAngle, Mout, REin, Min)
+function [] = MISES_files(BladeName, Option, InletAngle, Mout, REin, Min, BladeProfile)
 %MISES Summary of this function goes here
 %   Detailed explanation goes here:
 %   This function creates the files to run MISES
 %   Inputs:
-%       -   sasd
-%       -   sdas
+%       -   BladeName: Decided by the user
+%       -   Option: T or C
+%       -   InletAngle, Mout, REin, Min and BladeProfile: MISES inputs
 %   Outputs:
-%       -   sdf7
+%       -   ises and blade: modify them and generate new ones
 
 %% Create a copy of the RAW folder into a new one
 FolderName = strcat('./Mises_Files/Mises_',BladeName);
@@ -23,10 +24,11 @@ FolderSource = strcat(FolderName,'/', Source1);
 cd(FolderSource);
 
 % Modify ises
-delete 'ises.t106'
 if isequal(Option, 'T')
+    delete 'ises.t106'
     fileID = fopen('ises.t106','a+');
 else
+    delete 'ises.naca'
     fileID = fopen('ises.naca','a+');
 end
 Line{1} = strcat('1 2 5 6 15');
@@ -56,6 +58,32 @@ end
 fclose(fileID);
 
 % Modify blade
+BladeProfile = BladeProfile';
 
+if isequal(Option, 'T')
+    delete 'blade.t106'
+    fileID = fopen('blade.t106','a+');
+else
+    delete 'blade.naca'
+    fileID = fopen('blade.naca','a+');
+end
+
+if isequal(Option, 'T')
+    Line{1} = '   PERFIL T106';
+    Line{2} = ' 0.77289   -1.97966    1.00000     1.00000     0.797989';
+else
+    Line{1} = 'XBLADE V6.1.5';
+    Line{2} = ' 0.21255656  -0.26794919   0.50000000   0.50000000   1.00000000';
+end
+[m, ] = size(BladeProfile);
+for i = 1:m
+   Line{m+2} = ['    ',num2str(BladeProfile(m,1)),'       ',num2str(BladeProfile(m,2))];
+end
+
+for i = 1:numel(Line)
+   fprintf(fileID, '%s\n',Line{i}); 
+end
+
+fclose(fileID);
 end
 

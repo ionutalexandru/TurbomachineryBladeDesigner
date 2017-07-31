@@ -71,8 +71,8 @@ end
 % Same as Y
 
 % Store X Y
-Results{1,:} = [fliplr(xb) xa(2:numel(xa))];
-Results{2,:} = [fliplr(yb) ya(2:numel(ya))];
+Results{1,:} = [fliplr(xb(1:numel(xb)-1)) xa(2:numel(xa)-1)];
+Results{2,:} = [fliplr(yb(1:numel(yb)-1)) ya(2:numel(ya)-1)];
 % Store Xc1 and t1
 Results{3,:} = Xc1; % Save into Results variable
 Results{4,:} = ScallingFactor*t1; % Save into Results variable

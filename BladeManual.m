@@ -38,8 +38,8 @@ phi4 = linspace(180,180-phi_TEPS,n);
 x4 = -rTE-rTE*cosd(phi4);
 y4 = -rTE*sind(phi4);
 
-TEx = [fliplr(x4(1:n-1)) x3];
-TEy = [fliplr(y4(1:n-1)) y3];
+TEx = [fliplr(x4(2:n-1)) x3];
+TEy = [fliplr(y4(2:n-1)) y3];
 
 TE = [TEx; TEy];
 
