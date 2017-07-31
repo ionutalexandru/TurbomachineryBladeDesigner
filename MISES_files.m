@@ -62,28 +62,31 @@ BladeProfile = BladeProfile';
 
 if isequal(Option, 'T')
     delete 'blade.t106'
-    fileID = fopen('blade.t106','a+');
+    fileID1 = fopen('blade.t106','a+');
 else
     delete 'blade.naca'
-    fileID = fopen('blade.naca','a+');
+    fileID1 = fopen('blade.naca','a+');
 end
 
 if isequal(Option, 'T')
-    Line{1} = '   PERFIL T106';
-    Line{2} = ' 0.77289   -1.97966    1.00000     1.00000     0.797989';
+    Line1{1} = '   PERFIL T106';
+    Line1{2} = ' 0.77289   -1.97966    1.00000     1.00000     0.797989';
 else
-    Line{1} = 'XBLADE V6.1.5';
-    Line{2} = ' 0.21255656  -0.26794919   0.50000000   0.50000000   1.00000000';
+    Line1{1} = 'XBLADE V6.1.5';
+    Line1{2} = ' 0.21255656  -0.26794919   0.50000000   0.50000000   1.00000000';
 end
-[m, ] = size(BladeProfile);
+[m,~] = size(BladeProfile);
 for i = 1:m
-   Line{m+2} = ['    ',num2str(BladeProfile(m,1)),'       ',num2str(BladeProfile(m,2))];
+   Line1{i+2} = ['    ',num2str(BladeProfile(i,1)),'       ',num2str(BladeProfile(i,2))];
 end
 
-for i = 1:numel(Line)
-   fprintf(fileID, '%s\n',Line{i}); 
+for i = 1:numel(Line1)
+   fprintf(fileID1, '%s\n',Line1{i}); 
 end
 
-fclose(fileID);
+fclose(fileID1);
+system('cd ..');
+system('cd ..');
+system('cd ..');
 end
 
