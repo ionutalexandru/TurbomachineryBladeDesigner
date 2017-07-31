@@ -1,4 +1,4 @@
-function [ LE, Camber, TE, Camber2, Curve1, Curve2, Curve3, Curve4, CP_Bezier, Bladeprof ] = BladeManual( MetalInlet, MetalOutlet, Stagger, a, b, phi_LESS, phi_LEPS, phi_TESS, phi_TEPS, rTE, s_c, o_c, t_c, phi_o, phi_t )
+function [ LE, Camber, TE, Camber2, Curve1, Curve2, Curve3, Curve4, CP_Bezier ] = BladeManual( MetalInlet, MetalOutlet, Stagger, a, b, phi_LESS, phi_LEPS, phi_TESS, phi_TEPS, rTE, s_c, o_c, t_c, phi_o, phi_t )
 %UNTITLED Summary of this function goes here
 %   Detailed explanation goes here
 %   This is for a turbine
@@ -98,10 +98,9 @@ Curve4 = BezierCurve(P4PS,3)';
 TE1(1,:) = TE(1,199:100);
 TE1(2,:) = TE(2,199:100);
 
-TE2(1,:) = TE(1,98:1);
-TE2(2,:) = TE(2,98:1);
+TE2(1,:) = TE(1,99:1);
+TE2(2,:) = TE(2,99:1);
 
-Bladeprof(1,:) = [TE1(1,:) fliplr(Curve3(1,:)), fliplr(Curve1(1,:)), fliplr(LE(1,:)), Curve2(1,:), Curve4(1,:), TE2(1,:)];
-Bladeprof(2,:) = [TE1(2,:), fliplr(Curve3(2,:)), fliplr(Curve1(2,:)), fliplr(LE(2,:)), Curve2(2,:), Curve4(2,:), TE2(2,:)];
+Bladeprof(1,:) = [TE1, fliplr(Curve3(1,:), fliplr(]
 end
 
