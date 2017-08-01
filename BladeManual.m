@@ -1,10 +1,10 @@
-function [ LE, Camber, TE, Camber2, Curve1, Curve2, Curve3, Curve4, CP_Bezier, Bladeprof ] = BladeManual( MetalInlet, MetalOutlet, Stagger, a, b, phi_LESS, phi_LEPS, phi_TESS, phi_TEPS, rTE, s_c, o_c, t_c, phi_o, phi_t )
+function [ LE, Camber, TE, Camber2, Curve1, Curve2, Curve3, Curve4, CP_Bezier, Bladeprof ] = BladeManual( Option, MetalInlet, MetalOutlet, Stagger, a, b, phi_LESS, phi_LEPS, phi_TESS, phi_TEPS, rTE, s_c, o_c, t_c, phi_o, phi_t )
 %UNTITLED Summary of this function goes here
 %   Detailed explanation goes here
 %   This is for a turbine
 
 %% Obtain Camber Line
-Camber = CamberLine(MetalInlet, MetalOutlet, Stagger, 'T');
+Camber = CamberLine(MetalInlet, MetalOutlet, Stagger, Option);
 
 %% Leading Edge
 n = 100;
@@ -62,7 +62,9 @@ CP_Bezier = [CP1_PS; CP1_SS; CP5_PS; CP5_SS];
 %% Obtain the second control point
 
 Camber2 = Camber + [0; s_c/2]; % Add s/2 to the camber line
+%% Añadir aquí lo de compresor
 CP = [Camber(1,1001) s_c + Camber(2,1001)]; % TE of the upper cascade blade
+%% ---
 differ(1,:) = CP(1) - Camber2(1,:); % vector that goes from Camber 2 to CP
 differ(2,:) = CP(2) - Camber2(2,:); % vector that goes from Camber 2 to CP
 distance = sqrt((differ(1,:)).^2+(differ(2,:)).^2); % distance of vector that goes from Camber 2 to CP

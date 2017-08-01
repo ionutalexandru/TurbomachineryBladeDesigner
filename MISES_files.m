@@ -85,8 +85,8 @@ for i = 1:numel(Line1)
 end
 
 fclose(fileID1);
-system('cd ..');
-system('cd ..');
-system('cd ..');
+cd('..');
+cd('..');
+cd('..');
 end
 
