@@ -10,7 +10,18 @@ function [] = MISES_files(BladeName, Option, InletAngle, Mout, REin, Min, BladeP
 %       -   ises and blade: modify them and generate new ones
 
 %% Create a copy of the RAW folder into a new one
+cd('Mises_Files');
 FolderName = strcat('./Mises_Files/Mises_',BladeName);
+Folder = strcat('Mises_',BladeName);
+Content = ls;
+[m, ~] = size(Content);
+for i = 1:m
+   if isequal(Folder, Content(m,:))
+       delete Folder
+       break;
+   end
+end
+cd('..');
 mkdir(FolderName);
 copyfile('./Mises_Files/Raw',FolderName);
 
@@ -26,10 +37,10 @@ cd(FolderSource);
 % Modify ises
 if isequal(Option, 'T')
     delete 'ises.t106'
-    fileID = fopen('ises.t106','a+');
+    fileID = fopen('ises.t106','w+');
 else
     delete 'ises.naca'
-    fileID = fopen('ises.naca','a+');
+    fileID = fopen('ises.naca','w+');
 end
 Line{1} = strcat('1 2 5 6 15');
 Line{2} = strcat('1 3 4 6 18');
@@ -58,14 +69,13 @@ end
 fclose(fileID);
 
 % Modify blade
-BladeProfile = BladeProfile';
 
 if isequal(Option, 'T')
     delete 'blade.t106'
-    fileID1 = fopen('blade.t106','a+');
+    fileID1 = fopen('blade.t106','w+');
 else
     delete 'blade.naca'
-    fileID1 = fopen('blade.naca','a+');
+    fileID1 = fopen('blade.naca','w+');
 end
 
 if isequal(Option, 'T')

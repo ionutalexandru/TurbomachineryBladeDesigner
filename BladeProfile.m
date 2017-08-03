@@ -72,8 +72,19 @@ end
 
 % Store X Y
 Results{1,:} = [fliplr(xb(1:numel(xb)-1)) xa(2:numel(xa)-1)];
+Bladex = [fliplr(xb(1:numel(xb)-1)) xa(2:numel(xa)-1)]';
 Results{2,:} = [fliplr(yb(1:numel(yb)-1)) ya(2:numel(ya)-1)];
+Bladey = [fliplr(yb(1:numel(yb)-1)) ya(2:numel(ya)-1)]';
 % Store Xc1 and t1
 Results{3,:} = Xc1; % Save into Results variable
 Results{4,:} = ScallingFactor*t1; % Save into Results variable
+
+%% Save everything into a file
+BladeFile = ['.\Blade\Blade',Option,'.dat'];
+fileID = fopen(BladeFile,'w+');
+for i = 1:numel(Bladex)
+    fprintf(fileID, '%g\t%g\n', Bladex(i,1), Bladey(i,1));
+    fprintf(fileID, '\n');
+end
+fclose(fileID);
 end

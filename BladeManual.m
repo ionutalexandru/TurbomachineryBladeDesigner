@@ -62,9 +62,12 @@ CP_Bezier = [CP1_PS; CP1_SS; CP5_PS; CP5_SS];
 %% Obtain the second control point
 
 Camber2 = Camber + [0; s_c/2]; % Add s/2 to the camber line
-%% Añadir aquí lo de compresor
-CP = [Camber(1,1001) s_c + Camber(2,1001)]; % TE of the upper cascade blade
-%% ---
+if isequal(Option, 'T')
+   CP = [Camber(1,1001) s_c + Camber(2,1001)]; % TE of the upper cascade blade
+else
+   CP = [Camber(1,1) s_c + Camber(2,1)]; 
+end
+%% 
 differ(1,:) = CP(1) - Camber2(1,:); % vector that goes from Camber 2 to CP
 differ(2,:) = CP(2) - Camber2(2,:); % vector that goes from Camber 2 to CP
 distance = sqrt((differ(1,:)).^2+(differ(2,:)).^2); % distance of vector that goes from Camber 2 to CP
