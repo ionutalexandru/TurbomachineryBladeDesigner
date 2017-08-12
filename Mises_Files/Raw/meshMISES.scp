@@ -1,0 +1,19 @@
+#!/bin/csh
+
+set ejecutable_iset="/opt/MisesUC3M/iset"
+
+set nombre=$1
+
+echo "4" > iset.in
+echo "1" >> iset.in
+echo "" >> iset.in
+echo "2" >> iset.in
+echo "" >> iset.in
+echo "3" >> iset.in
+echo "4" >> iset.in
+echo "0" >> iset.in
+echo "0" >> iset.in
+
+$ejecutable_iset $nombre < iset.in
+
+rm iset.in

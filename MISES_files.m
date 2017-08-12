@@ -1,4 +1,4 @@
-function [] = MISES_files(BladeName, Option, InletAngle, Mout, REin, Min, BladeProfile)
+function [] = MISES_files(BladeName, Option, Metal1, Metal2, pitch_ratio, Stagger, InletAngle, Mout, REin, Min, BladeProfile)
 %MISES Summary of this function goes here
 %   Detailed explanation goes here:
 %   This function creates the files to run MISES
@@ -25,14 +25,45 @@ cd('..');
 mkdir(FolderName);
 copyfile('./Mises_Files/Raw',FolderName);
 
+%% Modify Blade Profile
+% Move to the left the blade profile in order to have positive coordinates
+[min_x, ~]  = min(BladeProfile(:,1));
+BladeProfile(:,1) = BladeProfile(:,1) + abs(min_x);
+[~, index]  = min(BladeProfile(:,1));
+m = numel(BladeProfile(:,1));
+n=150;
+Angle = linspace(0,180,n);
+cax = cosd(Stagger);
+Bladex_new = cax/2 - cax/2*cosd(Angle);
+
+Bladex1 = fliplr(BladeProfile(1:index,1)');
+Bladex2 = BladeProfile(index:m,1)';
+Bladey1 = fliplr(BladeProfile(1:index,2)');
+Bladey2 = BladeProfile(index:m,2)';
+
+Bladey1_new = interp1(Bladex1,Bladey1,Bladex_new,'pchip');
+Bladey2_new = interp1(Bladex2,Bladey2,Bladex_new,'pchip');
+
+BladeProfile = zeros(2,2*n-1);
+BladeProfile(1,:) = [fliplr(Bladex_new) Bladex_new(2:end)];
+BladeProfile(2,:) = [fliplr(Bladey1_new) Bladey2_new(2:end)];
+BladeProfile = BladeProfile';
+
 %% Load files to Matlab
 if isequal(Option, 'T')
     Source1 = 'T106A';
 else
     Source1 = 'NACA_651210';
 end
-FolderSource = strcat(FolderName,'/', Source1);
-cd(FolderSource);
+cd(FolderName)
+if isequal(Option, 'T')
+    rmdir('NACA_651210','s'); 
+else
+    rmdir('T106A','s'); 
+end
+cd(Source1);
+
+
 
 % Modify ises
 if isequal(Option, 'T')
@@ -80,10 +111,10 @@ end
 
 if isequal(Option, 'T')
     Line1{1} = '   PERFIL T106';
-    Line1{2} = ' 0.77289   -1.97966    1.00000     1.00000     0.797989';
+    Line1{2} = [' ',num2str(tand(Metal1)),'   -',num2str(tand(Metal2)),'    1.00000     1.00000     ',num2str(pitch_ratio)];
 else
     Line1{1} = 'XBLADE V6.1.5';
-    Line1{2} = ' 0.21255656  -0.26794919   0.50000000   0.50000000   1.00000000';
+    Line1{2} = [' ',num2str(tand(Metal1)),'   -',num2str(tand(Metal2)),'   0.50000000   0.50000000   ',num2str(pitch_ratio)];
 end
 [m,~] = size(BladeProfile);
 for i = 1:m
@@ -95,7 +126,25 @@ for i = 1:numel(Line1)
 end
 
 fclose(fileID1);
+
+if isequal(Option,'T')
+   filess = dir('*.t106'); 
+else
+    filess = dir('*.naca');
+end
+sizess = size(filess);
+for i=1:sizess
+   namess = filess(i).name;
+   [token, ~] = strtok(namess,'.');
+   New_file_name = [token, '.', BladeName];
+   fileID2 = fopen(New_file_name,'w+');
+   fclose(fileID2);
+   copyfile(namess,New_file_name);
+   delete(namess)
+   copyfile(New_file_name,'..');
+end
 cd('..');
+rmdir(Source1,'s');
 cd('..');
 cd('..');
 end

@@ -9,7 +9,7 @@ function Results = BladeProfile(ThicknessProfileName, Max_Thick, Xc, Yc, Stagger
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Load Thickness
-ProfileFileName = strcat('.\ThicknessProfiles\',ThicknessProfileName, '.dat');
+ProfileFileName = strcat('./ThicknessProfiles/',ThicknessProfileName, '.dat');
 ThicknessRaw = load(ProfileFileName)/100; % Load profile
 Xc1 = linspace(0,1,1000); % For presentations purposes
 t1 = interp1(ThicknessRaw(1,:),ThicknessRaw(2,:),Xc1,'pchip');
@@ -35,7 +35,7 @@ for i = 1:numel(Xc)
 end
 diffX = diff(Xc);
 diffY = diff(Yc);
-thetac = [0 atand(diffY./diffX)] + Stagger; % First Value 0 and ThetaC definition
+thetac = [0 atand(diffY./diffX)]; % First Value 0 and ThetaC definition
 
 %% Redefine Thickness distribution according with Xc coordinations
 t2 = ScallingFactor*interp1(Xc1,t1,Xc,'pchip');
@@ -80,7 +80,7 @@ Results{3,:} = Xc1; % Save into Results variable
 Results{4,:} = ScallingFactor*t1; % Save into Results variable
 
 %% Save everything into a file
-BladeFile = ['.\Blade\Blade',Option,'.dat'];
+BladeFile = ['./Blade/Blade',Option,'.dat'];
 fileID = fopen(BladeFile,'w+');
 for i = 1:numel(Bladex)
     fprintf(fileID, '%g\t%g\n', Bladex(i,1), Bladey(i,1));

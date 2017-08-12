@@ -11,8 +11,8 @@ function Message = SaveProfile(x, thick, type, Name )
 
 Data(1,:) = x;
 Data(2,:) = thick;
-FileName = ['.\ThicknessProfiles\',Name,'.dat'];
-ProfileName = ['.\ThicknessProfiles\','ThicknessProfiles',type,'.dat'];
+FileName = ['./ThicknessProfiles/',Name,'.dat'];
+ProfileName = ['./ThicknessProfiles/','ThicknessProfiles',type,'.dat'];
 
 fileID = fopen(FileName,'wt');
 for i = 1:2

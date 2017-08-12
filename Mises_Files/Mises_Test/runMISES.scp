@@ -1,0 +1,60 @@
+#!/bin/csh
+
+set ejecutable_ises="/home/ionut/bin/Mises/ises"
+set ejecutable_iset="/home/ionut/bin/Mises/iset"
+
+set OP_SYS=`uname`
+
+if ($OP_SYS != "Linux") then
+echo "No estas corriendo en Linux. Abort!!!!"
+goto fin
+endif
+
+rm -f core
+touch core
+chmod 444 core
+
+set nombre=$1
+
+echo "4" > iset.in
+echo "1" >> iset.in
+echo "" >> iset.in
+echo "2" >> iset.in
+echo "" >> iset.in
+echo "3" >> iset.in
+echo "4" >> iset.in
+echo "0" >> iset.in
+echo "0" >> iset.in
+
+#  $ejecutable_iset $nombre < iset.in
+
+set cont=0
+set count=0
+while ($cont<4 && $count<7)
+
+echo "30" > fichero.tmp
+echo "0" >> fichero.tmp
+echo "0" >> fichero.tmp
+
+$ejecutable_ises $nombre < fichero.tmp >&! error.tmp
+
+echo "--------------"
+echo "corrido iteracion $cont"
+
+set cod = `(awk -v cod=0 '{if ($1=="Converged" && $3=="tolerance"){cod=1}} END {print cod}' error.tmp)`
+
+@ count ++
+@ cont= $cont + $cod
+
+if ($cont == 4) then
+set error=0
+echo "caso $nombre convergido"
+endif
+if ($count == 7) then
+set error=1
+echo "caso $nombre NO convergido"
+endif
+
+end
+
+rm iset.in *.tmp

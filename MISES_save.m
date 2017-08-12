@@ -11,7 +11,7 @@ while (Text~="")
     i = i + 1;
 end
 
-    if i==5
+    if i==6
         error = 0;
     else
         error = 1;

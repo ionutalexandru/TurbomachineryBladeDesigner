@@ -1,0 +1,104 @@
+#!/bin/csh
+#########################################
+#                                       #
+# Postprocess for MISES at UC3M         #
+#                                       #
+# Antonio Antoranz                      #
+# Rev. 20151118                         #
+#                                       #
+#########################################
+
+set ejecutable_mises="/opt/MisesUC3M/mises2.68"
+set ejecutable_iplot="/opt/MisesUC3M/iplot"
+#set path_bin="/home/anantora/Lab_Session"
+set OP_SYS=`uname`
+
+if ($OP_SYS != "Linux") then
+	echo "Not running in Linux. Abort!!!!"
+	goto fin
+endif
+
+rm -f core
+touch core
+chmod 444 core
+
+set nombre=$1
+
+echo "case name: $nombre" >>! resultados.txt
+echo "Alpha1 Mn1 Re1 Alpha2 Mn2 Omega Zeta p1p01 p2p01 VRat" >> resultados.txt
+
+########### Files Flow parameters, Mis, Cp, H, Delta, Theta, Cf ##############
+
+    echo "7" >> fichero.tmp
+    echo "" >> fichero.tmp
+    echo "0" >> fichero.tmp
+    $ejecutable_iplot $nombre < fichero.tmp
+
+    echo "8" >> fichero.tmp
+    echo "" >> fichero.tmp
+    echo "0" >> fichero.tmp
+    $ejecutable_iplot $nombre < fichero.tmp
+
+    echo "1" > fichero.tmp
+    echo "1" >> fichero.tmp
+    echo "14" >> fichero.tmp
+    echo "0" >> fichero.tmp
+    echo "0" >> fichero.tmp
+    $ejecutable_iplot $nombre < fichero.tmp
+    mv plot.ps Mis.ps
+
+    echo "1" > fichero.tmp
+    echo "2" >> fichero.tmp
+    echo "14" >> fichero.tmp
+    echo "0" >> fichero.tmp
+    echo "0" >> fichero.tmp
+    $ejecutable_iplot $nombre < fichero.tmp
+    mv plot.ps Cp.ps
+
+    echo "1" > fichero.tmp
+    echo "3" >> fichero.tmp
+    echo "14" >> fichero.tmp
+    echo "0" >> fichero.tmp
+    echo "0" >> fichero.tmp
+    $ejecutable_iplot $nombre < fichero.tmp
+    mv plot.ps Hb.ps
+
+    echo "1" > fichero.tmp
+    echo "4" >> fichero.tmp
+    echo "14" >> fichero.tmp
+    echo "0" >> fichero.tmp
+    echo "0" >> fichero.tmp
+    $ejecutable_iplot $nombre < fichero.tmp
+    mv plot.ps SS.ps
+
+    echo "1" > fichero.tmp
+    echo "5" >> fichero.tmp
+    echo "14" >> fichero.tmp
+    echo "0" >> fichero.tmp
+    echo "0" >> fichero.tmp
+    $ejecutable_iplot $nombre < fichero.tmp
+    mv plot.ps PS.ps
+
+    echo "1" > fichero.tmp
+    echo "6" >> fichero.tmp
+    echo "14" >> fichero.tmp
+    echo "0" >> fichero.tmp
+    echo "0" >> fichero.tmp
+    $ejecutable_iplot $nombre < fichero.tmp
+    mv plot.ps Cf.ps
+
+
+########### Results Output Data Generation ##############
+
+    echo "$nombre" > fichero.tmp
+    echo "6" >> fichero.tmp
+    echo "0" >> fichero.tmp
+    
+    $ejecutable_mises < fichero.tmp >! data_mises_$nombre.txt
+
+    ./resultsMISES.scp data_mises_$nombre.txt >> resultados.txt    
+#    $path_bin/MiResultadoMISES.scp data_mises_$nombre.txt >> resultados.txt    
+
+
+  rm *.tmp
+  rm -f core
