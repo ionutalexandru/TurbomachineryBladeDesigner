@@ -41,8 +41,11 @@ Bladex2 = BladeProfile(index:m,1)';
 Bladey1 = fliplr(BladeProfile(1:index,2)');
 Bladey2 = BladeProfile(index:m,2)';
 
-Bladey1_new = interp1(Bladex1,Bladey1,Bladex_new,'pchip');
-Bladey2_new = interp1(Bladex2,Bladey2,Bladex_new,'pchip');
+[Bladex1, index1]  = unique(Bladex1);
+[Bladex2, index2]  = unique(Bladex2);
+
+Bladey1_new = interp1(Bladex1,Bladey1(index1),Bladex_new,'pchip');
+Bladey2_new = interp1(Bladex2,Bladey2(index2),Bladex_new,'pchip');
 
 BladeProfile = zeros(2,2*n-1);
 BladeProfile(1,:) = [fliplr(Bladex_new) Bladex_new(2:end)];
