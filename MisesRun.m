@@ -1,4 +1,4 @@
-function [] = MisesRun(BladeName, Route)
+function MisesRun(BladeName, Route)
 %MISESRUN Summary of this function goes here
 %   Detailed explanation goes here
 
@@ -77,5 +77,6 @@ for ii = 1:numel(tmp)
 end
 fclose(fid);
 clear tmp
+
 end
 
