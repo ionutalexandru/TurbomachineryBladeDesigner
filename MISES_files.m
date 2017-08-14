@@ -31,7 +31,7 @@ copyfile('./Mises_Files/Raw',FolderName);
 BladeProfile(:,1) = BladeProfile(:,1) + abs(min_x);
 [~, index]  = min(BladeProfile(:,1));
 m = numel(BladeProfile(:,1));
-n=150;
+n=65;
 Angle = linspace(0,180,n);
 cax = cosd(Stagger);
 Bladex_new = cax/2 - cax/2*cosd(Angle);
@@ -44,12 +44,17 @@ Bladey2 = BladeProfile(index:m,2)';
 [Bladex1, index1]  = unique(Bladex1);
 [Bladex2, index2]  = unique(Bladex2);
 
-Bladey1_new = interp1(Bladex1,Bladey1(index1),Bladex_new,'pchip');
+Bladey1_new = fliplr(interp1(Bladex1,Bladey1(index1),Bladex_new,'pchip'));
+Bladex1_new = fliplr(Bladex_new);
 Bladey2_new = interp1(Bladex2,Bladey2(index2),Bladex_new,'pchip');
+minn = min(Bladey2_new);
+Bladey1_new = Bladey1_new + minn;
+Bladey2_new = Bladey2_new + minn;
 
-BladeProfile = zeros(2,2*n-1);
-BladeProfile(1,:) = [fliplr(Bladex_new) Bladex_new(2:end)];
-BladeProfile(2,:) = [fliplr(Bladey1_new) Bladey2_new(2:end)];
+
+BladeProfile = zeros(2,2*n-4);
+BladeProfile(1,:) = [Bladex1_new(4:end) Bladex_new(2:end)];
+BladeProfile(2,:) = [Bladey1_new(4:end) Bladey2_new(2:end)];
 BladeProfile = BladeProfile';
 
 %% Load files to Matlab
@@ -66,8 +71,6 @@ else
 end
 cd(Source1);
 
-
-
 % Modify ises
 if isequal(Option, 'T')
     delete 'ises.t106'
@@ -76,24 +79,35 @@ else
     delete 'ises.naca'
     fileID = fopen('ises.naca','w+');
 end
-Line{1} = strcat('1 2 5 6 15');
-Line{2} = strcat('1 3 4 6 18');
 if isequal(Option, 'T')
-    Line{3} = [' 0.0000 0.0000 ',num2str(tand(InletAngle)),' -0.90732068 | Minl P1/Po1 Sinl Xinl'];
-    Line{4} = [' ', num2str(Mout),' 0.790126628 -1.97966 1.46529265 | MOUT P2/Po1 Sout Xout'];
+    Line{1} = strcat('1 2 5 6 15');
+    Line{2} = strcat('1 3 4 6 17');
+else
+    Line{1} = strcat('1 2 5 15');
+    Line{2} = strcat('1 3 4 15');
+end
+
+if isequal(Option, 'T')
+    Line{3} = [' 0.3000 0.0000 ',num2str(tand(InletAngle)),' -0.250000 | Minl P1/Po1 Sinl Xinl'];
+    Line{4} = [' ', num2str(Mout),' 0.00000 0.267949 1.250000 | MOUT P2/Po1 Sout Xout'];
 else
     Line{3} = [num2str(Min), ' 0.0000 ',num2str(tand(InletAngle)),' -0.90732068 | Minl P1/Po1 Sinl Xinl'];
     Line{4} = ' 0.400000 0.790126628 -1.97966 1.46529265 | MOUT P2/Po1 Sout Xout';
 end
 Line{5} = strcat(' 0.0000 0.0000   |mfr');
-Line{6} = [num2str(REin),' -0.8 | REYin ACRIT'];
-Line{7} = strcat(' 1.01  1.01 | XTR1 XTR2');
+if isequal(Option, 'T')
+    Line{6} = [num2str(REin),' -0.8 | REYin ACRIT'];
+    Line{7} = strcat(' 1.01  1.01 | XTR1 XTR2');
+else
+   Line{6} = [' 250000.000000 4.500000 | REYin NCRIT'];
+   Line{7} = ['1.100000  1.100000 | XTR1 XTR2'];
+end
 Line{8} = strcat(' 1 0.95 +1.0 |ISMOM MCRIT MUCON');
 Line{9} = strcat(' 0.0 0. | Bvr1 Bvr2');
 if isequal(Option, 'T')
     Line{10} = strcat(' 0. 0.  0. 0. 0. 0. 0. 0. 0. 0. 0.');
 else
-   Line{10} = '0. 0. 0. 35.0'; 
+   Line{10} = '0. 0. 0. 0.0'; 
 end
 
 for i = 1:numel(Line)
@@ -114,14 +128,18 @@ end
 
 if isequal(Option, 'T')
     Line1{1} = '   PERFIL T106';
-    Line1{2} = [' ',num2str(tand(Metal1)),'   -',num2str(tand(Metal2)),'    1.00000     1.00000     ',num2str(pitch_ratio)];
+    %Line1{2} = [' 0.77289   -1.97966    1.00000     1.00000     ',num2str(pitch_ratio)];
+    Line1{2} = sprintf('%.6f\t%.6f\t%.6f\t%.6f\t%.6f\t',tand(Metal1-12),tand(Metal2-10),1,1,pitch_ratio);
+    %Line1{2} = [' ',num2str(tand(Metal1-12)),'   -',num2str(tand(Metal2-10)),'    1.00000     1.00000     ',num2str(pitch_ratio)];
+
 else
     Line1{1} = 'XBLADE V6.1.5';
-    Line1{2} = [' ',num2str(tand(Metal1)),'   -',num2str(tand(Metal2)),'   0.50000000   0.50000000   ',num2str(pitch_ratio)];
+    %Line1{2} = [' 0.21255656   -1.97966   0.50000000   0.50000000   ',num2str(pitch_ratio)];
+    Line1{2} = [' ',' ',num2str(tand(Metal1-10)),'   -',num2str(tand(Metal2-10)),'   0.50000000   0.50000000   ',num2str(pitch_ratio)];
 end
 [m,~] = size(BladeProfile);
 for i = 1:m
-   Line1{i+2} = ['    ',num2str(BladeProfile(i,1)),'       ',num2str(BladeProfile(i,2))];
+   Line1{i+2} = sprintf('%.6f\t%.6f',BladeProfile(i,1),BladeProfile(i,2));
 end
 
 for i = 1:numel(Line1)
