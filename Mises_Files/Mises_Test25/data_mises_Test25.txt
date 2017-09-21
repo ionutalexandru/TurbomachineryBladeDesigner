@@ -1,0 +1,127 @@
+ 
+Enter ISES file extension
+ 
+  ___________________________________________________________
+ 
+        Mises v2.68    UC3M Aero                  Oct'2013   
+  ___________________________________________________________
+ 
+    1   ISES    Euler/BL analysis
+    2   IPLOT   Plotting utility
+    3   EDP     Pressure-editing utility
+    4   ISET    Grid generator
+    5   BLDSET  Blade editor
+    6   IPRINT  Print flow parameters
+    7   POLAR   Euler/BL parameter-sweep analysis
+    8   MILOP   Multi-point optimization driver
+    9   ISEQ    Point-sequence ISES execution for:  Test25_..
+ 
+   10   Edit  ises.Test25
+   11   Edit  blade.Test25
+   12   Copy all  *.Test25  files to new  *.xxx
+   13   Change current extension:  Test25
+ 
+   21   Print  plot.ps
+   22   Toggle X-Window background color
+   23   Set default number of ISES iterations
+ 
+Select MISES option (0=quit):  
+ w d(rV)  =                       NaN
+ w T / m  =  -0.0000000000000000     
+ d(Hoa)   =                       NaN  without wall heating
+ d(Hoa)   =                       NaN  with    wall heating
+
+ --------------------------------------------------------------
+
+Case Title: XBLADE V6.1.5                   
+
+ # blades:     6.0
+
+ Pitch   =  1.05000    AVDR    =  1.00000 (= r1b1/r2b2)
+
+ Gamma   =  1.40000
+ Rotrel  =  0.00000    w R/a0a =  0.00000    w R1/V1 =  0.00000
+
+ Re1     =  0.25000e6  Ncrit   =  4.50000       Turb =   0.462 %
+
+ M1(ref) =  0.35000    m'1 = -0.90732    r1 =  1.00000    b1 =  1.00000
+ M2(ref) =      NaN    m'2 =  1.46529    r2 =  1.00000    b2 =  1.00000
+
+ V2/V1     =      NaN
+ P2/P1     =      NaN    Po2/Po1   =      NaN    Poa2/Poa1  =      NaN
+ P1/Po1    =  0.91877    P2/Po1    =      NaN
+ P2/Poa1   =      NaN    P2/Poa2   =      NaN
+
+ rho2/rho1 =      NaN    rho1/rho1a=  0.94128    rhoo1/rho1a=  1.00000
+
+ Enthalpy including wall heating:
+   H2/H1     =      NaN
+   Ho2/Ho1   =  1.00000
+   H2/Hoa1   =      NaN
+   Hoa2/Hoa1 =      NaN
+
+ Enthalpy of inviscid flow w/o wall heating:
+   H2/H1     =      NaN
+   Ho2/Ho1   =  1.00000
+   H2/Hoa1   =      NaN
+   Hoa2/Hoa1 =      NaN
+   Ho1/Hoa1  =  1.00000
+
+   Wall temperature:  Hwall/H0a1 =   0.00000
+   Heat added:    deltaQ/(m H01) =   0.00000
+
+ Qinl      =  0.34579    Hinl     =  2.44021    TSrat =  0.35000
+ VXinl     =  0.33401    VYinl    =  0.08950
+ VXout     =      NaN    VYout    =      NaN
+ IsEffh    =      NaN  (using enthalpy with wall heating
+ IsEff     =      NaN  (using enthalpy w/o  wall heating
+
+ M1(abs) =  0.35000    alpha1 =  15.000 deg
+ M2(abs) =      NaN    alpha2 =     NaN deg
+
+ S1      =  0.26795  ...    15.000 deg.     M1ax  =  0.33807     M1tan  =  0.09059
+ S2      =      NaN  ...       NaN deg.     M2ax  =      NaN     M2tan  =      NaN
+ Sexit   =  1.62224  ...    58.349 deg.
+
+ b modes:  Bk =   0.0000   0.0000
+
+ Aerodynamic Forces and Moments :
+ Cx  =   1.7374  = Force in x direction/(mass V1)
+ Cy  =  -1.6485  = Torque about y/(mass r1 V1) = d(r Vtheta)/(r1 V1)
+ Cz  =  -1.0779  = Torque about z/(mass r1 V1) (about leading edge)
+
+ Losses:  Omega =      NaN  =>  visc =  0.15977   shock =-0.71013E-01
+          Zeta  =      NaN
+
+ Blade : 1
+   Cx =   1.7374   Cy  =  -1.6485
+   Passage loss =-0.71013E-01
+   Viscous loss =  0.15977  Xtr1   =  0.6991  Xtr2   =  0.0329
+
+ --------------------------------------------------------------
+ 
+  ___________________________________________________________
+ 
+        Mises v2.68    UC3M Aero                  Oct'2013   
+  ___________________________________________________________
+ 
+    1   ISES    Euler/BL analysis
+    2   IPLOT   Plotting utility
+    3   EDP     Pressure-editing utility
+    4   ISET    Grid generator
+    5   BLDSET  Blade editor
+    6   IPRINT  Print flow parameters
+    7   POLAR   Euler/BL parameter-sweep analysis
+    8   MILOP   Multi-point optimization driver
+    9   ISEQ    Point-sequence ISES execution for:  Test25_..
+ 
+   10   Edit  ises.Test25
+   11   Edit  blade.Test25
+   12   Copy all  *.Test25  files to new  *.xxx
+   13   Change current extension:  Test25
+ 
+   21   Print  plot.ps
+   22   Toggle X-Window background color
+   23   Set default number of ISES iterations
+ 
+Select MISES option (0=quit):  

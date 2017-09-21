@@ -1,0 +1,3 @@
+case name: Test25
+Alpha1 Mn1 Re1 Alpha2 Mn2 Omega Zeta p1p01 p2p01 VRat
+15.000 0.35000 0.25000e6 NaN NaN NaN NaN 0.91877 NaN NaN

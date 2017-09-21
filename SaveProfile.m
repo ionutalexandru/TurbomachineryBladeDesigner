@@ -1,4 +1,4 @@
-function Message = SaveProfile(x, thick, type, Name )
+function Message = SaveProfile(x, thick, Name )
 %SAVEPROOFILE Summary of this function goes here
 %   Detailed explanation goes here
 %   It receives as inputs:
@@ -12,7 +12,7 @@ function Message = SaveProfile(x, thick, type, Name )
 Data(1,:) = x;
 Data(2,:) = thick;
 FileName = ['./ThicknessProfiles/',Name,'.dat'];
-ProfileName = ['./ThicknessProfiles/','ThicknessProfiles',type,'.dat'];
+ProfileName = ['./ThicknessProfiles/','ThicknessProfiles.dat'];
 
 fileID = fopen(FileName,'wt');
 for i = 1:2

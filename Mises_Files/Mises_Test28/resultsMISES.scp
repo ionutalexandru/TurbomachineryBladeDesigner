@@ -1,0 +1,35 @@
+#!/bin/csh
+#########################################
+#                                       #
+# Results File for MISES at UC3M        #
+#                                       #
+# Antonio Antoranz                      #
+# Rev. 20151118                         #
+#                                       #
+#########################################
+
+# Fichero de entrada. Se obtiene al correr MiPostprocesoMISES.scp
+set fichero_in=$1
+
+# Variables leidas de los resultados de MISES
+set avdr = `(awk '$4 ~ /AVDR/ {print $6}' $fichero_in )` 
+set gamma = `(awk '$1 ~ /Gamma/ {print $3}' $fichero_in )` 
+set rotrel = `(awk '$1 ~ /Rotrel/ {print $3}' $fichero_in )` 
+set re1 = `(awk '$1 ~ /Re1/ {print $3}' $fichero_in )` 
+set v2v1 = `(awk '$1 ~ /V2\/V1/ {print $3}' $fichero_in )` 
+set p2p1 = `(awk '$1 ~ /P2\/P1/ {print $3}' $fichero_in )` 
+set p02p01 = `(awk '$4 ~ /Po2\/Po1/ {print $6}' $fichero_in )` 
+set p1p01 = `(awk '$1 ~ /P1\/Po1/ {print $3}' $fichero_in )` 
+set p2p01 = `(awk '$4 ~ /P2\/Po1/ {print $6}' $fichero_in )` 
+set rho2rho1 = `(awk '$1 ~ /rho2\/rho1/ {print $3}' $fichero_in )` 
+set m1 = `(awk '$1 ~ /M1\(ref\)/ {print $3}' $fichero_in )` 
+set alpha1 = `(awk '$1 ~ /S1/ {print $5}' $fichero_in )` 
+set m2 = `(awk '$1 ~ /M2\(ref\)/ {print $3}' $fichero_in )` 
+set alpha2 = `(awk '$1 ~ /S2/ {print $5}' $fichero_in )` 
+set omega = `(awk '$2 ~ /Omega/ {print $4}' $fichero_in )` 
+set zeta = `(awk '$1 ~ /Zeta/ {print $3}' $fichero_in )` 
+
+# Variables de salida
+echo "$alpha1 $m1 $re1 $alpha2 $m2 $omega $zeta $p1p01 $p2p01 $v2v1"
+
+
