@@ -1,11 +1,11 @@
-function Message = DeleteProfile(Name, type)
+function Message = DeleteProfile(Name)
 %DELETEPROFILE Summary of this function goes here
 %   Detailed explanation goes here
 %   It receives as input the profile name that 
 %   it will be deleted
 %   It also updates the listbox names
 
-ProfileName = ['./ThicknessProfiles/ThicknessProfiles',type,'.dat'];
+ProfileName = ['./ThicknessProfiles/ThicknessProfiles.dat'];
 Profiles = importdata(ProfileName);
 FileName = ['./ThicknessProfiles/',Name,'.dat'];
 

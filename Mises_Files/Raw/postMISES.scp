@@ -41,6 +41,9 @@ echo "Alpha1 Mn1 Re1 Alpha2 Mn2 Omega Zeta p1p01 p2p01 VRat" >> resultados.txt
 
     echo "1" > fichero.tmp
     echo "1" >> fichero.tmp
+    echo "21" >> fichero.tmp
+    echo "C" >> fichero.tmp
+    echo "0" >> fichero.tmp
     echo "14" >> fichero.tmp
     echo "0" >> fichero.tmp
     echo "0" >> fichero.tmp
@@ -49,6 +52,9 @@ echo "Alpha1 Mn1 Re1 Alpha2 Mn2 Omega Zeta p1p01 p2p01 VRat" >> resultados.txt
 
     echo "1" > fichero.tmp
     echo "2" >> fichero.tmp
+    echo "21" >> fichero.tmp
+    echo "C" >> fichero.tmp
+    echo "0" >> fichero.tmp
     echo "14" >> fichero.tmp
     echo "0" >> fichero.tmp
     echo "0" >> fichero.tmp
@@ -57,6 +63,9 @@ echo "Alpha1 Mn1 Re1 Alpha2 Mn2 Omega Zeta p1p01 p2p01 VRat" >> resultados.txt
 
     echo "1" > fichero.tmp
     echo "3" >> fichero.tmp
+    echo "21" >> fichero.tmp
+    echo "C" >> fichero.tmp
+    echo "0" >> fichero.tmp
     echo "14" >> fichero.tmp
     echo "0" >> fichero.tmp
     echo "0" >> fichero.tmp
@@ -65,6 +74,9 @@ echo "Alpha1 Mn1 Re1 Alpha2 Mn2 Omega Zeta p1p01 p2p01 VRat" >> resultados.txt
 
     echo "1" > fichero.tmp
     echo "4" >> fichero.tmp
+    echo "21" >> fichero.tmp
+    echo "C" >> fichero.tmp
+    echo "0" >> fichero.tmp
     echo "14" >> fichero.tmp
     echo "0" >> fichero.tmp
     echo "0" >> fichero.tmp
@@ -73,6 +85,9 @@ echo "Alpha1 Mn1 Re1 Alpha2 Mn2 Omega Zeta p1p01 p2p01 VRat" >> resultados.txt
 
     echo "1" > fichero.tmp
     echo "5" >> fichero.tmp
+    echo "21" >> fichero.tmp
+    echo "C" >> fichero.tmp
+    echo "0" >> fichero.tmp
     echo "14" >> fichero.tmp
     echo "0" >> fichero.tmp
     echo "0" >> fichero.tmp
@@ -81,6 +96,9 @@ echo "Alpha1 Mn1 Re1 Alpha2 Mn2 Omega Zeta p1p01 p2p01 VRat" >> resultados.txt
 
     echo "1" > fichero.tmp
     echo "6" >> fichero.tmp
+    echo "21" >> fichero.tmp
+    echo "C" >> fichero.tmp
+    echo "0" >> fichero.tmp
     echo "14" >> fichero.tmp
     echo "0" >> fichero.tmp
     echo "0" >> fichero.tmp

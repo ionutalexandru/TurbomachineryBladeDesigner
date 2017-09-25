@@ -6,7 +6,7 @@ set nombre=$1
 
 echo "4" > iset.in
 echo "1" >> iset.in
-echo "" >> iset.in
+echo "-999" >> iset.in
 echo "2" >> iset.in
 echo "" >> iset.in
 echo "3" >> iset.in
