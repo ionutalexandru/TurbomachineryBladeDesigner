@@ -1,0 +1,37 @@
+%!PS-Adobe-2.0
+%%Title: plot.ps                                                                         
+%%Creator: Xplot11
+%%Pages: (atend)
+%%BoundingBox: (atend)
+%%Orientation: Landscape
+%%EndComments
+
+%%Page:    1     1
+gsave  %Save current context
+% Define macros for drawing
+/rscal {10 div exch 10 div exch } bind def
+/M { rscal moveto } bind def
+/L { rscal lineto } bind def
+/SG { setgray } bind def
+/NP { newpath } bind def
+/SL { setlinewidth } bind def
+/CPSM { currentpoint stroke moveto } bind def
+/CFS  { closepath fill stroke } bind def
+/CO { 2 index 255 div 2 index 255 div 2 index 255 div
+      setrgbcolor pop pop pop } bind def
+/LAND { 0 790 translate -90 rotate } bind def
+
+% Set up for default line type and width
+ 1 setlinejoin 0.25 SL [ ] 0 setdash 0 SG
+% Rotate and translate for Landscape format
+ 612    0 translate   90 rotate
+  0.25 SL
+ [ ] 0 setdash
+  0.50 SL
+ 1000   820 M *****   820 L
+ 1000   820 M  1000 ***** L
+stroke showpage grestore
+%%BoundingBox:    100.0    82.0   100.0    82.0
+
+%%Trailer
+%%Pages:    1

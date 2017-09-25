@@ -1,0 +1,3 @@
+case name: Test26
+Alpha1 Mn1 Re1 Alpha2 Mn2 Omega Zeta p1p01 p2p01 VRat
+NaN NaN NaNe6 NaN NaN NaN NaN NaN NaN NaN

@@ -50,6 +50,7 @@ Bladey2_new = interp1(Bladex2,Bladey2(index2),Bladex_new,'pchip');
 minn = min(Bladey2_new);
 Bladey1_new = Bladey1_new + minn;
 Bladey2_new = Bladey2_new + minn;
+<<<<<<< HEAD
 
 if opt == 1
     BladeProfile = zeros(2,2*n-6);
@@ -66,6 +67,32 @@ else
 end
 
 
+=======
+<<<<<<< HEAD
+
+if opt == 1
+    BladeProfile = zeros(2,2*n-4);
+    BladeProfile(1,:) = [Bladex1_new(4:end) Bladex_new(2:end)]; %Blade Manual 2 -- -1 --> -2
+    BladeProfile(2,:) = [Bladey1_new(4:end) Bladey2_new(2:end)];
+elseif opt == 2
+    BladeProfile = zeros(2,2*n-6);
+    BladeProfile(1,:) = [Bladex1_new(3:end) Bladex_new(2:end-3)]; %Blade Manual 2 -- -1 --> -2
+    BladeProfile(2,:) = [Bladey1_new(3:end) Bladey2_new(2:end-3)];
+else
+    BladeProfile = zeros(2,2*n-1);
+    BladeProfile(1,:) = [Bladex1_new(1:end) Bladex_new(2:end)]; %Blade Manual 2 -- -1 --> -2
+    BladeProfile(2,:) = [Bladey1_new(1:end) Bladey2_new(2:end)];
+end
+
+
+=======
+
+
+BladeProfile = zeros(2,2*n-4);
+BladeProfile(1,:) = [Bladex1_new(4:end) Bladex_new(2:end)];
+BladeProfile(2,:) = [Bladey1_new(4:end) Bladey2_new(2:end)];
+>>>>>>> d61b8977713f8f67d533e7273d4fa9d552b323e9
+>>>>>>> 8c7b181f42fe27ee96a33c8d1f377f95e3245a0e
 BladeProfile = BladeProfile';
 
 % Turbine: 3:end, 2:end-1 --> 2*n-4
@@ -103,8 +130,18 @@ else
 end
 
 if isequal(Option, 'T')
+<<<<<<< HEAD
     Line{3} = [' 0.3000 0.0000 ',num2str(tand(InletAngle)),' -0.40000 | Minl P1/Po1 Sinl Xinl'];
     Line{4} = [' ', num2str(Mout),' 0.00000 0.267949 1.40000 | MOUT P2/Po1 Sout Xout'];
+=======
+<<<<<<< HEAD
+    Line{3} = [' 0.3000 0.0000 ',num2str(tand(InletAngle)),' -0.40000 | Minl P1/Po1 Sinl Xinl'];
+    Line{4} = [' ', num2str(Mout),' 0.00000 0.267949 1.40000 | MOUT P2/Po1 Sout Xout'];
+=======
+    Line{3} = [' 0.3000 0.0000 ',num2str(tand(InletAngle)),' -0.250000 | Minl P1/Po1 Sinl Xinl'];
+    Line{4} = [' ', num2str(Mout),' 0.00000 0.267949 1.250000 | MOUT P2/Po1 Sout Xout'];
+>>>>>>> d61b8977713f8f67d533e7273d4fa9d552b323e9
+>>>>>>> 8c7b181f42fe27ee96a33c8d1f377f95e3245a0e
 else
     Line{3} = [num2str(Min), ' 0.1000 ',num2str(tand(InletAngle)),' -0.25 | Minl P1/Po1 Sinl Xinl'];
     Line{4} = ' 0.400000 0.790126628 -1.97966 1.25 | MOUT P2/Po1 Sout Xout';
@@ -112,10 +149,21 @@ end
 Line{5} = strcat(' 0.0000 0.0000   |mfr');
 if isequal(Option, 'T')
     Line{6} = [num2str(REin),' -0.8 | REYin ACRIT'];
+<<<<<<< HEAD
     Line{7} = strcat(' 0.02  0.02 | XTR1 XTR2');
 else
    Line{6} = [num2str(REin),' 4.500000 | REYin NCRIT'];
    Line{7} = ['1.10000  1.10000 | XTR1 XTR2'];
+=======
+<<<<<<< HEAD
+    Line{7} = strcat(' 0.02  0.02 | XTR1 XTR2');
+=======
+    Line{7} = strcat(' 1.01  1.01 | XTR1 XTR2');
+>>>>>>> d61b8977713f8f67d533e7273d4fa9d552b323e9
+else
+   Line{6} = [' 250000.000000 4.500000 | REYin NCRIT'];
+   Line{7} = ['1.100000  1.100000 | XTR1 XTR2'];
+>>>>>>> 8c7b181f42fe27ee96a33c8d1f377f95e3245a0e
 end
 Line{8} = strcat(' 1 0.95 +1.0 |ISMOM MCRIT MUCON');
 Line{9} = strcat(' 0.0 0. | Bvr1 Bvr2');
@@ -144,13 +192,29 @@ end
 if isequal(Option, 'T')
     Line1{1} = '   PERFIL T106';
     %Line1{2} = [' 0.77289   -1.97966    1.00000     1.00000     ',num2str(pitch_ratio)];
+<<<<<<< HEAD
     Line1{2} = sprintf('%.6f\t%.6f\t%.6f\t%.6f\t%.6f\t',tand(Metal1),tand(-Metal2),1,1,pitch_ratio);
+=======
+<<<<<<< HEAD
+    Line1{2} = sprintf('%.6f\t%.6f\t%.6f\t%.6f\t%.6f\t',tand(Metal1),tand(-Metal2),1,1,pitch_ratio);
+=======
+    Line1{2} = sprintf('%.6f\t%.6f\t%.6f\t%.6f\t%.6f\t',tand(Metal1-12),tand(Metal2-10),1,1,pitch_ratio);
+>>>>>>> d61b8977713f8f67d533e7273d4fa9d552b323e9
+>>>>>>> 8c7b181f42fe27ee96a33c8d1f377f95e3245a0e
     %Line1{2} = [' ',num2str(tand(Metal1-12)),'   -',num2str(tand(Metal2-10)),'    1.00000     1.00000     ',num2str(pitch_ratio)];
 
 else
     Line1{1} = 'XBLADE V6.1.5';
     %Line1{2} = [' 0.21255656   -1.97966   0.50000000   0.50000000   ',num2str(pitch_ratio)];
+<<<<<<< HEAD
     Line1{2} = [' ',' ',num2str(tand(Metal1)),'   -',num2str(tand(Metal2)),'   0.50000000   0.50000000   ',num2str(pitch_ratio)];
+=======
+<<<<<<< HEAD
+    Line1{2} = [' ',' ',num2str(tand(Metal1)),'   -',num2str(tand(Metal2)),'   0.50000000   0.50000000   ',num2str(pitch_ratio)];
+=======
+    Line1{2} = [' ',' ',num2str(tand(Metal1-10)),'   -',num2str(tand(Metal2-10)),'   0.50000000   0.50000000   ',num2str(pitch_ratio)];
+>>>>>>> d61b8977713f8f67d533e7273d4fa9d552b323e9
+>>>>>>> 8c7b181f42fe27ee96a33c8d1f377f95e3245a0e
 end
 [m,~] = size(BladeProfile);
 for i = 1:m
