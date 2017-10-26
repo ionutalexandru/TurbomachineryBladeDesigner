@@ -13,20 +13,21 @@ ProfileFileName = strcat('./ThicknessProfiles/',ThicknessProfileName, '.dat');
 ThicknessRaw = load(ProfileFileName)/100; % Load profile
 Xc1 = linspace(ThicknessRaw(1,2),1,1000); % For presentations purposes
 t2 = interp1(ThicknessRaw(1,2:end),ThicknessRaw(2,2:end),Xc1,'pchip');
-anglett = linspace(0,90,10);
-b = ThicknessRaw(2,2);
-a = ThicknessRaw(1,2);
-tt1(1,:) = a - a*cosd(anglett);
-tt1(2,:) = b*sind(anglett);
-for i=1:10
-   t1(1,i) = tt1(1,i);
-   t1(2,i) = tt1(2,i);
-end
-for i = 11:numel(t2)
-   t1(1,i) = Xc1(i-9);
-   t1(2,i) = t2(i-9);
-end
-
+anglett = linspace(0,90-atand((t2(2)-t2(1))/(Xc1(2)-Xc1(1))),10);
+% b = ThicknessRaw(2,2);
+% a = ThicknessRaw(1,2);
+% tt1(1,:) = a - a*cosd(anglett);
+% tt1(2,:) = b*sind(anglett);
+% for i=1:10
+%    t1(1,i) = tt1(1,i);
+%    t1(2,i) = tt1(2,i);
+% end
+% for j = 1:1000
+%    t1(1,j+10) = Xc1(j);
+%    t1(2,j+10) = t2(j);
+% end
+t1(1,:) = Xc1;
+t1(2,:) = t2;
 % Scalling factor
 tmax = max(t1(2,:)); %Maximum Thickness Value
 ScallingFactor = Max_Thick/tmax; % Scalling Factor
