@@ -1,3 +1,0 @@
-case name: Test23
-Alpha1 Mn1 Re1 Alpha2 Mn2 Omega Zeta p1p01 p2p01 VRat
-

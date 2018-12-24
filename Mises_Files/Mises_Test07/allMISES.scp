@@ -1,5 +1,0 @@
-#!/bin/csh
-
-./meshMISES.scp $1
-./runMISES.scp $1
-./postMISES.scp $1

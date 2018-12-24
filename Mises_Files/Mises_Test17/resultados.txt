@@ -1,3 +1,0 @@
-case name: Test17
-Alpha1 Mn1 Re1 Alpha2 Mn2 Omega Zeta p1p01 p2p01 VRat
-10.000 0.25418 1.00000e6 -48.470 0.40000 0.04073 0.01689 0.95606 0.89401 1.55906
